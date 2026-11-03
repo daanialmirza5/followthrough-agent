@@ -23,15 +23,13 @@ Priya: let's park it. okay, also Kabir wasn't here but he needs to send the pres
 
 /** Canned result used in demo mode (no API key) for the sample transcript. */
 export function demoExtract(today: string, pastDecisionIds: Record<string, string>): ExtractResult {
-  const d = (offset: number) => {
-    const t = new Date(today + "T00:00:00");
-    t.setDate(t.getDate() + offset);
-    return t.toISOString().slice(0, 10);
-  };
+  // Work in UTC throughout: mixing local midnight with toISOString() shifted every date one day
+  // early on servers east of UTC (e.g. IST), so "tomorrow" became today.
+  const base = new Date(today + "T00:00:00Z");
+  const d = (offset: number) => new Date(base.getTime() + offset * 86_400_000).toISOString().slice(0, 10);
   // next Friday / Wednesday relative to today
   const nextDow = (dow: number) => {
-    const t = new Date(today + "T00:00:00");
-    const diff = (dow - t.getDay() + 7) % 7 || 7;
+    const diff = (dow - base.getUTCDay() + 7) % 7 || 7;
     return d(diff);
   };
   return {
