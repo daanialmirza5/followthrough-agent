@@ -192,6 +192,6 @@ Or just watch the [**auto-play tour**](https://followthrough-agent.vercel.app/ap
 
 **FollowThrough.** Speak it, approve it, and nothing falls through.
 
-Built voice-first with Wispr Flow by [Daanial Mirza](https://github.com/daanialmirza5).
+Built voice-first with Wispr Flow by [Daanial Baig](https://github.com/daanialmirza5).
 
 </div>
